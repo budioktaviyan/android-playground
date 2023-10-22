@@ -17,21 +17,24 @@ class MainActivity : ComponentActivity() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-
     binding = ActivityMainBinding.inflate(layoutInflater)
     setContentView(binding.root)
 
-    val repository = (application as MainApp).container.repository.getTodo()
-    repository
-      .subscribeOn(Schedulers.io())
+    val container = (application as MainApp).container
+    val repository = container.repository.getTodo()
+
+    val disposable = repository
       .observeOn(AndroidSchedulers.mainThread())
-      .subscribe { result ->
-        binding.tvMain.text = result.activities.first()
-      }.addTo(disposables)
+      .subscribeOn(Schedulers.io())
+      .subscribe { response ->
+        val adapter = MainAdapter(activities = response.activities)
+        binding.rvMain.adapter = adapter
+      }
+    disposable.addTo(disposables)
   }
 
   override fun onDestroy() {
     super.onDestroy()
-    disposables.dispose()
+    disposables.clear()
   }
 }
