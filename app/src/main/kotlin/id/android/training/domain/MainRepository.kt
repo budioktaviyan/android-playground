@@ -13,7 +13,7 @@ class RemoteMainRepository(private val service: MainService) : MainRepository {
   override fun getTodo(): Single<Entity> =
     service.getTodo().map { response ->
       Entity(
-        activities = response.map { data ->
+        activities = response.reversed().map { data ->
           data.activity
         }
       )
