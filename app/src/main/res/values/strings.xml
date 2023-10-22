@@ -1,3 +1,7 @@
 <resources>
   <string name="app_name">Bootcamp</string>
+  <string name="button_add">Add Todo</string>
+  <string name="placeholder_add">Input your todo</string>
+  <string name="action_add">Add</string>
+  <string name="action_cancel">Cancel</string>
 </resources>

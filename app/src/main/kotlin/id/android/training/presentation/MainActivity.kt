@@ -1,9 +1,12 @@
 package id.android.training.presentation
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import androidx.activity.ComponentActivity
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import id.android.training.MainApp
+import id.android.training.R
 import id.android.training.databinding.ActivityMainBinding
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
@@ -16,6 +19,7 @@ class MainActivity : ComponentActivity() {
 
   private val disposables = CompositeDisposable()
 
+  @SuppressLint("InflateParams")
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     binding = ActivityMainBinding.inflate(layoutInflater)
@@ -31,9 +35,19 @@ class MainActivity : ComponentActivity() {
         val adapter = MainAdapter(activities = response.activities)
         binding.rvMain.adapter = adapter
         binding.rvMain.visibility = View.VISIBLE
+        binding.fabMain.visibility = View.VISIBLE
         binding.pbMain.visibility = View.GONE
       }
     disposable.addTo(disposables)
+
+    binding.fabMain.setOnClickListener {
+      MaterialAlertDialogBuilder(this).apply {
+        setTitle(resources.getString(R.string.button_add))
+        setView(layoutInflater.inflate(R.layout.view_dialog_main, null))
+        setPositiveButton(resources.getString(R.string.action_add), null)
+        setNegativeButton(resources.getString(R.string.action_cancel), null)
+      }.show()
+    }
   }
 
   override fun onDestroy() {
