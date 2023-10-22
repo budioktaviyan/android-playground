@@ -1,6 +1,7 @@
 package id.android.training.presentation
 
 import android.os.Bundle
+import android.view.View
 import androidx.activity.ComponentActivity
 import id.android.training.MainApp
 import id.android.training.databinding.ActivityMainBinding
@@ -29,6 +30,8 @@ class MainActivity : ComponentActivity() {
       .subscribe { response ->
         val adapter = MainAdapter(activities = response.activities)
         binding.rvMain.adapter = adapter
+        binding.rvMain.visibility = View.VISIBLE
+        binding.pbMain.visibility = View.GONE
       }
     disposable.addTo(disposables)
   }
