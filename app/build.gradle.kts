@@ -1,7 +1,7 @@
 plugins {
   id("com.android.application")
   kotlin("android")
-  kotlin("plugin.serialization") version "1.9.10"
+  kotlin("plugin.serialization") version "1.9.21"
 }
 
 android {
@@ -45,7 +45,7 @@ dependencies {
   implementation("io.reactivex.rxjava3:rxandroid:3.0.2")
 
   // Kotlin serialization
-  implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
+  implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.2")
 
   // Network dependencies
   implementation("com.squareup.retrofit2:retrofit:2.9.0")
